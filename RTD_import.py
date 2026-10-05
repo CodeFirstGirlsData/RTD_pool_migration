@@ -6,7 +6,6 @@ import math
 from datetime import datetime
 import time
 
-
 API_KEY = #API key goes here
 API_VERSION = "20240404"
 
@@ -129,7 +128,8 @@ def get_multiselect_ids(custom_field_id):
 
 #list of custom fields which have select options so need a specific id to upload values
 custom_field_ids_select = {
-    "cohort": 1469024,
+    "degree_cohort": 1487817,
+    "mla_cohort": 1487819,
     "degree_stream": 1469050,
     "mla_stream": 1469415,
     "masters_stream": 1469416,
@@ -246,17 +246,6 @@ def upload_cv(candidate_id, cv_url):
         print(response.text)
         sys.exit(1)
 
-df = pd.read_csv('degree_outcome.csv')
-
-for index, row in df.iterrows():
-
-    #assign values to multi select fields
-    if row['course_type'] == 'Degree':
-        update_select_field(row['team_tailor_id'], 1485156, row['course_outcome'])
-    else:
-        update_select_field(row['team_tailor_id'], 1485525, row['course_outcome'])
-
-'''
 #read in the csv file to import
 df = pd.read_csv('batch_9.csv')
 
@@ -294,6 +283,5 @@ for index, row in df.iterrows():
     #rate limiting - 2 second pause
     print("candidate completed")
     time.sleep(2)
-'''
 
 
