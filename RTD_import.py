@@ -6,7 +6,7 @@ import math
 from datetime import datetime
 import time
 
-API_KEY = 'lqc-2zlgx3UHLCeByhfECtkKXNXvZJ78ewdfnXlQ'
+API_KEY = #API key goes here 
 API_VERSION = "20240404"
 
 header = {
