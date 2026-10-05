@@ -6,7 +6,8 @@ import math
 from datetime import datetime
 import time
 
-API_KEY = #API key goes here 
+
+API_KEY = #API key goes here
 API_VERSION = "20240404"
 
 header = {
@@ -128,12 +129,12 @@ def get_multiselect_ids(custom_field_id):
 
 #list of custom fields which have select options so need a specific id to upload values
 custom_field_ids_select = {
-    "course_type": 1468979,
     "cohort": 1469024,
     "degree_stream": 1469050,
     "mla_stream": 1469415,
     "masters_stream": 1469416,
-    "course_outcome": 1469429,
+    "degree_outcome": 1485156,
+    "mla_outcome": 1485525,
     "uk_region": 1267976,
     "work_study_status": 1262980,
     "uk_rtw": 1262996
@@ -144,7 +145,8 @@ custom_field_ids_multiselect = {
     "nationalities": 1275481,
     "commercial_skills": 1262985,
     "salary_expectations": 1262982,
-    "uk_last_10_years_checks": 1274792
+    "uk_last_10_years_checks": 1274792,
+    "course_type": 1484860
 }
 
 #creates a dict of these field ids with their corresponding options as a sub-dict
@@ -244,8 +246,19 @@ def upload_cv(candidate_id, cv_url):
         print(response.text)
         sys.exit(1)
 
+df = pd.read_csv('degree_outcome.csv')
+
+for index, row in df.iterrows():
+
+    #assign values to multi select fields
+    if row['course_type'] == 'Degree':
+        update_select_field(row['team_tailor_id'], 1485156, row['course_outcome'])
+    else:
+        update_select_field(row['team_tailor_id'], 1485525, row['course_outcome'])
+
+'''
 #read in the csv file to import
-df = pd.read_csv('batch_6.csv')
+df = pd.read_csv('batch_9.csv')
 
 #replace nulls with empty string
 df = df.fillna("")
@@ -281,6 +294,6 @@ for index, row in df.iterrows():
     #rate limiting - 2 second pause
     print("candidate completed")
     time.sleep(2)
-
+'''
 
 
