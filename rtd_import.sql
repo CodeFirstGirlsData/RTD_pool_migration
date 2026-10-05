@@ -8,7 +8,12 @@ CASE
   WHEN Course_Type = 'DEGREE' Then 'Degree'
   WHEN Course_Type = 'MLA' Then 'MLA' 
 END course_type,
-Course_date cohort, 
+CASE
+  WHEN Course_Type = 'DEGREE' Then Course_date 
+END degree_cohort,
+CASE
+  WHEN Course_Type = 'MLA' Then Course_date 
+END mla_cohort, 
 CASE 
   WHEN Course_Type = 'DEGREE' Then Stream
 END degree_stream, 
