@@ -8,7 +8,12 @@ CASE
   WHEN Course_Type = 'DEGREE' Then 'Degree'
   WHEN Course_Type = 'MLA' Then 'MLA' 
 END course_type,
-Course_date cohort, 
+CASE
+  WHEN Course_Type = 'DEGREE' Then Course_date 
+END degree_cohort,
+CASE
+  WHEN Course_Type = 'MLA' Then Course_date 
+END mla_cohort, 
 CASE 
   WHEN Course_Type = 'DEGREE' Then Stream
 END degree_stream, 
@@ -36,6 +41,28 @@ CASE
   WHEN work_study_status = 'Employed (Part-time)' THEN 'Employed (part time)'
   ELSE work_study_status
 END work_study_status,
+eu_rtw eu_rtw_og, 
+CASE 
+  WHEN eu_rtw = 'Yes - I am an EU or EEA citizen' THEN TRUE
+  ELSE FALSE
+END eu_citizen,
+CASE 
+  WHEN eu_rtw LIKE 'Yes%' THEN TRUE 
+  WHEN eu_rtw LIKE 'No, I require a sponsored visa to work in the EEA' THEN FALSE 
+  ELSE NULL
+END eu_rtw,
+CASE
+  WHEN eu_rtw = 'No -  I am a non-EU national with a work, family, student or graduate visa' THEN 'non-EU national with a work, family, student or graduate visa'
+  WHEN eu_rtw = 'Yes, I have permanent residency/settled status' THEN 'permanent residency/settled status'
+  WHEN eu_rtw = 'Yes, I am a British citizen and can live and work in EEA countries without restrictions' THEN 'British citizen in Ireland'
+  WHEN eu_rtw = 'Yes - I have been granted refugee/asylum status by the EU' THEN 'granted refugee/asylum status by the EU'
+  ELSE NULL
+END eu_rtw_details, 
+CASE 
+  WHEN eu_rtw = 'No, I require a sponsored visa to work in the EEA' THEN TRUE
+  WHEN eu_rtw LIKE 'Yes%' THEN FALSE
+  ELSE NULL
+END eu_requires_sponsorship,
 hireflix,
 ARRAY_TO_STRING(array[Nationality,Property_dual_nationality],", ") nationalities,
 Dual_nationality_yes eu_holds_dual_nationality,

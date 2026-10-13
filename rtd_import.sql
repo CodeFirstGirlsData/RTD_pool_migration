@@ -43,8 +43,8 @@ CASE
   ELSE work_study_status
 END work_study_status,
 CASE 
-  WHEN uk_rtw LIKE '%British Citizen%' THEN 'British citizen'
   WHEN uk_rtw LIKE '%permanent settled%' THEN 'Other'
+  WHEN uk_rtw LIKE '%British Citizen%' THEN 'British citizen'
   WHEN uk_rtw LIKE '%graduate%' THEN 'Graduate Visa'
   WHEN uk_rtw LIKE '%work or family visa%' THEN 'Other'
   WHEN uk_rtw LIKE '%refugee%' THEN 'Refugee or Humanitarian Protection'
