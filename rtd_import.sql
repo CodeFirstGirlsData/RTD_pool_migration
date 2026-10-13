@@ -50,8 +50,8 @@ CASE
   WHEN uk_rtw LIKE '%refugee%' THEN 'Refugee or Humanitarian Protection'
 END uk_rtw, 
 CASE
-    WHEN uk_rtw LIKE 'permanent settled' THEN uk_rtw
-    WHEN uk_rtw LIKE 'work or family visa' THEN uk_rtw
+    WHEN uk_rtw LIKE '%permanent settled%' THEN uk_rtw
+    WHEN uk_rtw LIKE '%work or family visa%' THEN uk_rtw
 END uk_rtw_other_reason,
 hireflix,
 ARRAY_TO_STRING(array[Nationality,Property_dual_nationality],", ") nationalities,
